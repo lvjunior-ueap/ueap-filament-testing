@@ -128,6 +128,10 @@ class User extends Authenticatable implements HasName, FilamentUser, HasMedia
 
     public function canAccessPanel(Panel $panel): bool
     {
+        if ($panel->getId() === 'cpa') {
+            return $this->hasRole('cpa');
+        }
+
         if ($panel->getId() === 'admin') {
             return $this->hasRole('dinfo');
         }
